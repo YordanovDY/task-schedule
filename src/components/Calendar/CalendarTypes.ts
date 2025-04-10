@@ -1,6 +1,4 @@
-import { NrRange } from "ts-number-range"
-
-type Month = NrRange<1, 13>;
+import { Month } from "../../types/MonthType";
 
 export type Dates = (number | null)[];
 
