@@ -1,4 +1,4 @@
-import Calendar from './components/Calendar/Calendar';
+import Calendar from './components/calendar/Calendar';
 import ScheduleProvider from './components/providers/schedule-provider/ScheduleProvider';
 import './styles/core.css';
 import './styles/styles.css';
