@@ -5,7 +5,7 @@
     gap: 1px;
 }
 
-.day-of-week{
+.day-of-week {
     flex: 0 0 calc((100% - 6px) / 7);
     text-align: center;
 }
@@ -15,10 +15,21 @@
     height: 80px;
     flex: 0 0 calc((100% - 6px) / 7);
     border: 1px solid black;
+    cursor: pointer;
 }
 
 .calendar-nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+.calendar-date-inactive {
+    cursor: not-allowed;
+    background: radial-gradient(#7d7d7d 0%, #ffffff 100%);
+    opacity: 0.2;
+}
+
+.calendar-date-weekend {
+    background-color: rgb(191, 152, 61);
 }

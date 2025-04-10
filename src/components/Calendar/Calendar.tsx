@@ -29,7 +29,7 @@ export default function Calendar() {
                         <li className={style['day-of-week']}>Sunday</li>
                         {
                             dates.map((date, index) =>
-                                <DateItem key={index} date={date} />)
+                                <DateItem key={index} position={index + 1} date={date} />)
                         }
                     </ul>
                 </div>
