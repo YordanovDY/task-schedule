@@ -1,9 +1,13 @@
+import Calendar from './components/Calendar/Calendar';
+import './styles/core.css';
+import './styles/styles.css';
+
 function App() {
 
   return (
-    <>
-      <h1>Works</h1>
-    </>
+    <div className="content">
+      <Calendar />
+    </div>
   )
 }
 

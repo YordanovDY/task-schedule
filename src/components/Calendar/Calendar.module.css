@@ -1,0 +1,13 @@
+.calendar-ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+}
+
+.calendar-date {
+    width: 100px;
+    height: 80px;
+    flex: 0 0 calc((100% - 6px) / 7);
+    border: 1px solid black;
+}
