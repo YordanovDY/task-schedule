@@ -1,20 +1,10 @@
-import { ReactNode, useReducer } from "react";
-import { ScheduleContext } from "../../contexts/ScheduleContext";
-import { Month } from "../../types/MonthType";
-
-interface ScheduleProviderProps {
-    children: ReactNode
-}
+import { useReducer } from "react";
+import { ScheduleContext } from "../../../contexts/ScheduleContext";
+import { Month } from "../../../types/MonthType";
+import { DateAction, DateState, ScheduleProviderProps } from "./ScheduleProviderTypes";
 
 export default function ScheduleProvider({ children }: ScheduleProviderProps) {
     const now = new Date();
-
-    interface DateState {
-        month: Month,
-        year: number
-    }
-
-    type DateAction = { type: 'NEXT_MONTH' } | { type: 'PREVIOUS_MONTH' };
 
     const dateReducer = (state: DateState, action: DateAction): DateState => {
         switch (action.type) {
