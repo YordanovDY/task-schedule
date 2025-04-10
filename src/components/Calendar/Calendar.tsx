@@ -1,4 +1,6 @@
 import { useScheduleContext } from '../../contexts/ScheduleContext';
+import NextMonth from './buttons/NextMonth';
+import PreviousMonth from './buttons/PreviousMonth';
 import style from './Calendar.module.css';
 import { formatMonth, getDates } from './CalendarUtils';
 import DateItem from './DateItem/DateItem';
@@ -11,7 +13,11 @@ export default function Calendar() {
     return (
         <>
             <section>
-                <h2>{monthLabel}</h2>
+                <nav className={style['calendar-nav']}>
+                    <PreviousMonth />
+                    <h2>{monthLabel}</h2>
+                    <NextMonth />
+                </nav>
                 <div>
                     <ul className={style['calendar-ul']}>
                         {

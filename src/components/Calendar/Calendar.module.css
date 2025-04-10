@@ -11,3 +11,9 @@
     flex: 0 0 calc((100% - 6px) / 7);
     border: 1px solid black;
 }
+
+.calendar-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
