@@ -3,4 +3,12 @@
     font-size: 60px;
     background-color: #644700;
     color: #fdf2d7;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+}
+
+.nav-btn:hover {
+    background-color: #ffde8a;
+    color: #ffffff;
 }

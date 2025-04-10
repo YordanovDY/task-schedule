@@ -12,7 +12,7 @@ export default function Calendar() {
 
     return (
         <>
-            <section>
+            <section className="d-flex f-direction-column gap-10 padding-20">
                 <nav className={style['calendar-nav']}>
                     <PreviousMonth />
                     <h2>{monthLabel}</h2>
@@ -20,6 +20,13 @@ export default function Calendar() {
                 </nav>
                 <div>
                     <ul className={style['calendar-ul']}>
+                        <li className={style['day-of-week']}>Monday</li>
+                        <li className={style['day-of-week']}>Tuesday</li>
+                        <li className={style['day-of-week']}>Wednesday</li>
+                        <li className={style['day-of-week']}>Thursday</li>
+                        <li className={style['day-of-week']}>Friday</li>
+                        <li className={style['day-of-week']}>Saturday</li>
+                        <li className={style['day-of-week']}>Sunday</li>
                         {
                             dates.map((date, index) =>
                                 <DateItem key={index} date={date} />)

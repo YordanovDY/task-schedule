@@ -5,6 +5,11 @@
     gap: 1px;
 }
 
+.day-of-week{
+    flex: 0 0 calc((100% - 6px) / 7);
+    text-align: center;
+}
+
 .calendar-date {
     width: 100px;
     height: 80px;
