@@ -1,9 +1,12 @@
+import { useScheduleContext } from '../../contexts/ScheduleContext';
 import style from './Calendar.module.css';
 import { getDates } from './CalendarUtils';
 import DateItem from './DateItem/DateItem';
 
 export default function Calendar() {
     const dates = getDates(2, 2025);
+    const { month, year } = useScheduleContext();
+    const dates = getDates(month, year);
 
     return (
         <>
