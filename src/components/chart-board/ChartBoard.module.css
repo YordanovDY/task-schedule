@@ -1,0 +1,26 @@
+.chart-board{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid #5b4721;
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 700px;
+    min-width: 800px;
+    background-color: #37180a;
+}
+
+.header{
+    color: #fff6a4;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.task-row {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
