@@ -10,6 +10,23 @@ export default function Calendar() {
     const dates = getDates(month, year);
     const monthLabel = formatMonth(month, year);
 
+    const checkIsToday = (date: number | null): boolean => {
+        if (date === null) {
+            return false
+        }
+
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth() + 1;
+        const currentDate = now.getDate();
+
+        if (year === currentYear && month === currentMonth && date === currentDate) {
+            return true
+        }
+
+        return false;
+    }
+
     return (
         <>
             <section className="d-flex f-direction-column gap-10 padding-20">
@@ -28,8 +45,10 @@ export default function Calendar() {
                         <li className={style['day-of-week']}>Saturday</li>
                         <li className={style['day-of-week']}>Sunday</li>
                         {
-                            dates.map((date, index) =>
-                                <DateItem key={index} position={index + 1} date={date} />)
+                            dates.map((date, index) => {
+                                const isToday = checkIsToday(date);
+                                return <DateItem key={index} position={index + 1} date={date} isToday={isToday} />
+                            })
                         }
                     </ul>
                 </div>

@@ -18,6 +18,15 @@
     cursor: pointer;
 }
 
+.calendar-date:hover{
+    background-color: #fff6a4;
+    transition: 400ms;
+}
+
+.calendar-date-today{
+    border: 7px red double;
+}
+
 .calendar-nav {
     display: flex;
     justify-content: space-around;
