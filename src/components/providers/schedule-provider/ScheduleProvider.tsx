@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 import { ScheduleContext } from "../../../contexts/ScheduleContext";
-import { Month } from "../../../types/MonthType";
+import { Month } from "../../../types/Month";
 import { DateAction, DateState, ScheduleProviderProps } from "./ScheduleProviderTypes";
 
 export default function ScheduleProvider({ children }: ScheduleProviderProps) {

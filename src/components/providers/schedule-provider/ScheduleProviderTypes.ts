@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Month } from "../../../types/MonthType";
+import { Month } from "../../../types/Month";
 
 export interface ScheduleProviderProps {
     children: ReactNode

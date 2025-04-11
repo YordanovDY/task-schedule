@@ -1,4 +1,4 @@
-import { Month } from "../../types/MonthType";
+import { Month } from "../../types/Month";
 
 export type Dates = (number | null)[];
 

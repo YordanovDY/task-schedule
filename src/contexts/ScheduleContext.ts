@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { Month } from "../types/MonthType";
+import { Month } from "../types/Month";
 
 interface ScheduleContextProps {
     month: Month,
