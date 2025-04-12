@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { Category } from "../../../types/Task";
+import { Category, Priority } from "../../../types/Task";
 import { getStyleByCategory } from "../../../utils/styleUtil";
 import style from "../ChartBoard.module.css";
 
@@ -51,3 +51,58 @@ export function getCategoryIcon(category: Category): JSX.Element | null {
 
     return icon;
 }
+
+export function getPriorityStars(priority: Priority): JSX.Element | null {
+    let stars = null;
+
+    switch (priority) {
+        case 'Low':
+            stars = <span>
+                <i className="fa-solid fa-star" />
+                <i className="fa-regular fa-star" />
+                <i className="fa-regular fa-star" />
+                <i className="fa-regular fa-star" />
+                <i className="fa-regular fa-star" />
+            </span>
+            break;
+
+        case 'Medium':
+            stars = <span>
+                <i className="fa-solid fa-star" />
+                <i className="fa-solid fa-star" />
+                <i className="fa-regular fa-star-half-stroke" />
+                <i className="fa-regular fa-star" />
+                <i className="fa-regular fa-star" />
+            </span>
+            break;
+
+        case 'High':
+            stars = <span>
+                <i className="fa-solid fa-star" />
+                <i className="fa-solid fa-star" />
+                <i className="fa-solid fa-star" />
+                <i className="fa-solid fa-star" />
+                <i className="fa-regular fa-star" />
+            </span>
+            break;
+
+        case 'Critical':
+            stars = <span>
+                <i className="fa-solid fa-star" />
+                <i className="fa-solid fa-star" />
+                <i className="fa-solid fa-star" />
+                <i className="fa-solid fa-star" />
+                <i className="fa-solid fa-star" />
+            </span>
+            break;
+    }
+
+    return stars;
+}
+
+
+/*
+<i className="fa-solid fa-star" /> // *full star
+<i className="fa-regular fa-star-half-stroke" /> // *half star
+<i className="fa-regular fa-star" /> // *empty star
+*/

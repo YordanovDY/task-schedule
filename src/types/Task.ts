@@ -3,7 +3,7 @@ export type Category = 'Planning' | 'Implementation' | 'Problem Solving' | 'Test
 
 type Status = 'Pending' | 'In Progress' | 'Completed'
 
-type Priority = 'Low' | 'Medium' | 'High' | 'Critical';
+export type Priority = 'Low' | 'Medium' | 'High' | 'Critical';
 
 export interface Task {
     date: Date;

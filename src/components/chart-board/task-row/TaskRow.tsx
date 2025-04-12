@@ -1,7 +1,7 @@
 import moment from "moment";
 import { Task } from "../../../types/Task";
 import Button from "../../shared/button/Button";
-import { getCategoryIcon, getClasses } from "./TaskRowUtil";
+import { getCategoryIcon, getClasses, getPriorityStars } from "./TaskRowUtil";
 
 interface TaskRowProps {
     task: Task;
@@ -10,6 +10,7 @@ interface TaskRowProps {
 export default function TaskRow({ task }: TaskRowProps) {
     const compStyle = getClasses(task.category);
     const catIcon = getCategoryIcon(task.category);
+    const priorityStars = getPriorityStars(task.priority);
 
     return (
         <li className={compStyle.join(' ')}>
@@ -18,7 +19,12 @@ export default function TaskRow({ task }: TaskRowProps) {
                     {catIcon}
                     <span>{task.category}</span>
                 </div>
-                <div>{task.priority}</div>
+                <div className="d-flex gap-5 ai-center">
+                    {priorityStars}
+                    <span>
+                        {task.priority}
+                    </span>
+                </div>
                 <div>{task.status}</div>
                 <div className="d-flex gap-5 ai-center">
                     <i className="fa-regular fa-clock" />
