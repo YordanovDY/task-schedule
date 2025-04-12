@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { Category, Priority } from "../../../types/Task";
+import { Category, Priority, Status } from "../../../types/Task";
 import { getStyleByCategory } from "../../../utils/styleUtil";
 import style from "../ChartBoard.module.css";
 
@@ -100,9 +100,22 @@ export function getPriorityStars(priority: Priority): JSX.Element | null {
     return stars;
 }
 
+export function getStatusIcon(status: Status): JSX.Element | null {
+    let statusIcon = null;
 
-/*
-<i className="fa-solid fa-star" /> // *full star
-<i className="fa-regular fa-star-half-stroke" /> // *half star
-<i className="fa-regular fa-star" /> // *empty star
-*/
+    switch (status) {
+        case 'Pending':
+            statusIcon = <i className="fa-solid fa-spinner" />
+            break;
+
+        case 'In Progress':
+            statusIcon = <i className="fa-solid fa-gears" />
+            break;
+
+        case 'Completed':
+            statusIcon = <i className="fa-solid fa-circle-check" />
+            break;
+    }
+
+    return statusIcon;
+}

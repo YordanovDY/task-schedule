@@ -1,7 +1,8 @@
 import moment from "moment";
 import { Task } from "../../../types/Task";
 import Button from "../../shared/button/Button";
-import { getCategoryIcon, getClasses, getPriorityStars } from "./TaskRowUtil";
+import { getCategoryIcon, getClasses, getPriorityStars, getStatusIcon } from "./TaskRowUtil";
+import style from '../ChartBoard.module.css';
 
 interface TaskRowProps {
     task: Task;
@@ -11,6 +12,7 @@ export default function TaskRow({ task }: TaskRowProps) {
     const compStyle = getClasses(task.category);
     const catIcon = getCategoryIcon(task.category);
     const priorityStars = getPriorityStars(task.priority);
+    const statusIcon = getStatusIcon(task.status);
 
     return (
         <li className={compStyle.join(' ')}>
@@ -25,7 +27,12 @@ export default function TaskRow({ task }: TaskRowProps) {
                         {task.priority}
                     </span>
                 </div>
-                <div>{task.status}</div>
+                <div className={style['status-label']}>
+                    {statusIcon}
+                    <span>
+                        {task.status}
+                    </span>
+                </div>
                 <div className="d-flex gap-5 ai-center">
                     <i className="fa-regular fa-clock" />
                     <span>
