@@ -5,15 +5,19 @@
     border: 1px solid #5b4721;
     border-radius: 8px;
     padding: 20px;
-    min-height: 700px;
+    height: 800px;
     min-width: 800px;
     background-color: #37180a;
+    overflow-y: auto;
 }
 
 .header {
     color: #fff6a4;
     text-align: center;
     text-decoration: underline;
+    position: sticky;
+    top: -20px;
+    background-color: #37180a;
 }
 
 .task-row {
