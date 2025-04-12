@@ -3,11 +3,12 @@ import { Month } from '../../types/Month';
 import NextMonth from './buttons/NextMonth';
 import PreviousMonth from './buttons/PreviousMonth';
 import style from './Calendar.module.css';
-import { formatMonth, getDates, isSameDate } from './CalendarUtils';
+import { formatMonth, getDates } from './CalendarUtils';
+import { isSameDate } from '../../utils/dateUtil';
 import DateItem from './date-item/DateItem';
 
 export default function Calendar() {
-    const { month, year, tasks } = useScheduleContext();
+    const { month, year, tasks, showDateTasks } = useScheduleContext();
     const dates = getDates(month, year);
     const monthLabel = formatMonth(month, year);
 
@@ -59,12 +60,17 @@ export default function Calendar() {
                             dates.map((date, index) => {
                                 const isToday = checkIsToday(date);
                                 const hasTasks = checkForTasks(date, month, year);
+                                const dateSelectHandler = date
+                                    ? showDateTasks.bind(null, date, month, year)
+                                    : () => { }
+
                                 return <DateItem
                                     key={index}
                                     position={index + 1}
                                     date={date}
                                     isToday={isToday}
                                     hasTasks={hasTasks}
+                                    handler={dateSelectHandler}
                                 />
                             })
                         }

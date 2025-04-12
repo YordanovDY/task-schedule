@@ -1,8 +1,54 @@
 import { useReducer } from "react";
 import { ScheduleContext } from "../../../contexts/ScheduleContext";
 import { Month } from "../../../types/Month";
-import { DateAction, DateState, ScheduleProviderProps } from "./ScheduleProviderTypes";
+import { DateAction, DateState, ScheduleProviderProps, SelectedDateAction, SelectedDateState } from "./ScheduleProviderTypes";
 import { Task } from "../../../types/Task";
+import { isSameDate } from "../../../utils/dateUtil";
+
+// ! TESTING PURPOSES ONLY
+const tasks: Task[] = [
+    {
+        id: '3c67c01d-0b0f-4a8e-bf4a-fbd982c5419e',
+        date: new Date('2025-04-10 10:00'),
+        category: 'Testing',
+        status: 'Pending',
+        priority: 'Medium',
+        description: 'Outline roadmap for Q2 product updates and features.',
+    },
+    {
+        id: '9f3b8a4e-8a32-45a1-b8ae-6201cfc9c2ae',
+        date: new Date('2025-04-12'),
+        category: 'Deployment',
+        status: 'In Progress',
+        priority: 'High',
+        description: 'Develop authentication flow with OAuth integration.',
+    },
+    {
+        id: '71acbcb1-dff5-4b0f-a0c2-f738d616c79b',
+        date: new Date('2025-04-09'),
+        category: 'Planning',
+        status: 'Pending',
+        priority: 'Critical',
+        description: 'Investigate and resolve API timeout errors affecting checkout.',
+    },
+    {
+        id: 'aed91fc1-147f-42c1-b449-cb1e504b6e2b',
+        date: new Date('2025-04-08'),
+        category: 'Learning',
+        status: 'Completed',
+        priority: 'Low',
+        description: 'Watch TypeScript best practices course on frontendmasters.',
+    },
+    {
+        id: 'e1dbedb8-0f91-40f1-b72f-b0b6e4d7358f',
+        date: new Date('2025-03-11'),
+        category: 'Meeting',
+        status: 'Completed',
+        priority: 'Medium',
+        description: 'Sprint planning session with product and engineering teams.',
+    }
+];
+//! ----------------------
 
 export default function ScheduleProvider({ children }: ScheduleProviderProps) {
     const now = new Date();
@@ -29,65 +75,61 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
         }
     }
 
-    const [date, dispatch] = useReducer(dateReducer, { month: now.getMonth() + 1 as Month, year: now.getFullYear() });
+    const [date, dispatchDate] = useReducer(dateReducer, { month: now.getMonth() + 1 as Month, year: now.getFullYear() });
 
     const previousMonth = (): void => {
-        dispatch({ type: 'PREVIOUS_MONTH' });
+        dispatchDate({ type: 'PREVIOUS_MONTH' });
     }
 
     const nextMonth = (): void => {
-        dispatch({ type: 'NEXT_MONTH' });
+        dispatchDate({ type: 'NEXT_MONTH' });
+    }
+
+    const getTasks = (date: number, month: Month, year: number): Task[] => {
+        const taskList = tasks.filter(task => isSameDate(task.date, new Date(`${year}-${month}-${date}`)));
+        return taskList;
     }
 
     const { month, year } = date;
 
-    // ! TESTING PURPOSES ONLY
-    const tasks: Task[] = [
-        {
-            id: '3c67c01d-0b0f-4a8e-bf4a-fbd982c5419e',
-            date: new Date('2025-04-10'),
-            category: 'Testing',
-            status: 'Pending',
-            priority: 'Medium',
-            description: 'Outline roadmap for Q2 product updates and features.',
-        },
-        {
-            id: '9f3b8a4e-8a32-45a1-b8ae-6201cfc9c2ae',
-            date: new Date('2025-04-11'),
-            category: 'Deployment',
-            status: 'In Progress',
-            priority: 'High',
-            description: 'Develop authentication flow with OAuth integration.',
-        },
-        {
-            id: '71acbcb1-dff5-4b0f-a0c2-f738d616c79b',
-            date: new Date('2025-04-09'),
-            category: 'Planning',
-            status: 'Pending',
-            priority: 'Critical',
-            description: 'Investigate and resolve API timeout errors affecting checkout.',
-        },
-        {
-            id: 'aed91fc1-147f-42c1-b449-cb1e504b6e2b',
-            date: new Date('2025-04-08'),
-            category: 'Learning',
-            status: 'Completed',
-            priority: 'Low',
-            description: 'Watch TypeScript best practices course on frontendmasters.',
-        },
-        {
-            id: 'e1dbedb8-0f91-40f1-b72f-b0b6e4d7358f',
-            date: new Date('2025-03-11'),
-            category: 'Meeting',
-            status: 'Completed',
-            priority: 'Medium',
-            description: 'Sprint planning session with product and engineering teams.',
+
+    const selectedDateReducer = (state: SelectedDateState, action: SelectedDateAction) => {
+        switch (action.type) {
+            case 'SELECT_DATE':
+                return {
+                    date: action.date,
+                    month: action.month,
+                    year: action.year,
+                    tasks: getTasks(action.date, action.month, action.year)
+                }
+
+            default:
+                return state;
         }
-    ];
-    //! ----------------------
+    }
+
+    const [selectedDate, dispatchSelectedDate] = useReducer(selectedDateReducer, {
+        month: now.getMonth() + 1 as Month,
+        year: now.getFullYear(),
+        date: now.getDate(),
+        tasks: getTasks(now.getDate(), now.getMonth() + 1 as Month, now.getFullYear())
+    });
+
+    const showDateTasks = (date: number, month: Month, year: number) => {
+        dispatchSelectedDate({ type: 'SELECT_DATE', date, month, year });
+    }
 
     return (
-        <ScheduleContext.Provider value={{ tasks, month, year, previousMonth, nextMonth }}>
+        <ScheduleContext.Provider
+            value={{
+                tasks,
+                month,
+                year,
+                selectedDate,
+                previousMonth,
+                nextMonth,
+                showDateTasks
+            }}>
             {children}
         </ScheduleContext.Provider>
     );

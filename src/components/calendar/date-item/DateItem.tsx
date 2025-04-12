@@ -5,13 +5,14 @@ interface DateItemProps {
     position: number;
     isToday: boolean;
     hasTasks: boolean;
+    handler: () => void
 }
 
-export default function DateItem({ date, position, isToday, hasTasks }: DateItemProps) {
+export default function DateItem({ date, position, isToday, hasTasks, handler }: DateItemProps) {
     const classNames = getClassName(date, position, isToday, hasTasks);
 
     return (
-        <li className={classNames.join(' ')}>{date}</li>
+        <li onClick={handler} className={classNames.join(' ')}>{date}</li>
     );
 }
 
