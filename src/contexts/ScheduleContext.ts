@@ -1,7 +1,9 @@
 import { createContext, useContext } from "react";
 import { Month } from "../types/Month";
+import { Task } from "../types/Task";
 
 interface ScheduleContextProps {
+    tasks: Task[],
     month: Month,
     year: number,
     previousMonth: () => void,
@@ -9,8 +11,6 @@ interface ScheduleContextProps {
 }
 
 export const ScheduleContext = createContext<ScheduleContextProps | null>(null);
-
-
 
 type useScheduleContextHook = () => ScheduleContextProps;
 

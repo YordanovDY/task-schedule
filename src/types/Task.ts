@@ -6,6 +6,7 @@ export type Status = 'Pending' | 'In Progress' | 'Completed'
 export type Priority = 'Low' | 'Medium' | 'High' | 'Critical';
 
 export interface Task {
+    id: string;
     date: Date;
     category: Category;
     status: Status;
