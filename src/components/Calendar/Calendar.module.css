@@ -18,12 +18,12 @@
     cursor: pointer;
 }
 
-.calendar-date:hover{
+.calendar-date:hover {
     background-color: #fff6a4;
     transition: 400ms;
 }
 
-.calendar-date-today{
+.calendar-date-today {
     border: 7px red double;
 }
 
@@ -41,4 +41,19 @@
 
 .calendar-date-weekend {
     background-color: rgb(191, 152, 61);
+}
+
+.calendar-date-tasks {
+    position: relative;
+}
+
+.calendar-date-tasks::after {
+    content: 'TASKS';
+    background-color: #37180a;
+    color: whitesmoke;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
 }

@@ -1,12 +1,13 @@
 import { useScheduleContext } from '../../contexts/ScheduleContext';
+import { Month } from '../../types/Month';
 import NextMonth from './buttons/NextMonth';
 import PreviousMonth from './buttons/PreviousMonth';
 import style from './Calendar.module.css';
-import { formatMonth, getDates } from './CalendarUtils';
+import { formatMonth, getDates, isSameDate } from './CalendarUtils';
 import DateItem from './date-item/DateItem';
 
 export default function Calendar() {
-    const { month, year } = useScheduleContext();
+    const { month, year, tasks } = useScheduleContext();
     const dates = getDates(month, year);
     const monthLabel = formatMonth(month, year);
 
@@ -25,6 +26,16 @@ export default function Calendar() {
         }
 
         return false;
+    }
+
+    const checkForTasks = (date: number | null, month: Month, year: number): boolean => {
+        if (date === null) {
+            return false;
+        }
+
+        const foundTask = tasks.find(task => isSameDate(new Date(`${year}-${month}-${date}`), task.date));
+
+        return !!foundTask;
     }
 
     return (
@@ -47,7 +58,14 @@ export default function Calendar() {
                         {
                             dates.map((date, index) => {
                                 const isToday = checkIsToday(date);
-                                return <DateItem key={index} position={index + 1} date={date} isToday={isToday} />
+                                const hasTasks = checkForTasks(date, month, year);
+                                return <DateItem
+                                    key={index}
+                                    position={index + 1}
+                                    date={date}
+                                    isToday={isToday}
+                                    hasTasks={hasTasks}
+                                />
                             })
                         }
                     </ul>

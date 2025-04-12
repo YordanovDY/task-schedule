@@ -4,19 +4,24 @@ interface DateItemProps {
     date: number | null;
     position: number;
     isToday: boolean;
+    hasTasks: boolean;
 }
 
-export default function DateItem({ date, position, isToday }: DateItemProps) {
-    const classNames = getClassName(date, position, isToday);
+export default function DateItem({ date, position, isToday, hasTasks }: DateItemProps) {
+    const classNames = getClassName(date, position, isToday, hasTasks);
 
     return (
         <li className={classNames.join(' ')}>{date}</li>
     );
 }
 
-function getClassName(date: number | null, position: number, isToday: boolean): string[] {
+function getClassName(date: number | null, position: number, isToday: boolean, hasTasks: boolean): string[] {
     const classes: string[] = [style['calendar-date']];
     const weekendPositions = [6, 7, 13, 14, 20, 21, 27, 28, 34, 35, 41, 42];
+
+    if (hasTasks) {
+        classes.push(style['calendar-date-tasks']);
+    }
 
     if (isToday) {
         classes.push(style['calendar-date-today']);

@@ -77,7 +77,7 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
         },
         {
             id: 'e1dbedb8-0f91-40f1-b72f-b0b6e4d7358f',
-            date: new Date('2025-04-11'),
+            date: new Date('2025-03-11'),
             category: 'Meeting',
             status: 'Completed',
             priority: 'Medium',
