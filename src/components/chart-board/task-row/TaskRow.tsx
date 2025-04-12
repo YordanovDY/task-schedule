@@ -36,7 +36,7 @@ export default function TaskRow({ task }: TaskRowProps) {
                 <div className="d-flex gap-5 ai-center">
                     <i className="fa-regular fa-clock" />
                     <span>
-                        {moment(task.date).format("hh:mm")}
+                        {moment(task.date).format("kk:mm")}
                     </span>
                 </div>
             </div>

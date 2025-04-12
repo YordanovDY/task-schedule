@@ -16,6 +16,14 @@ const tasks: Task[] = [
         description: 'Outline roadmap for Q2 product updates and features.',
     },
     {
+        id: '3c67hd1d-0b3f-4a8e-bf1a-fbd932c5419e',
+        date: new Date('2025-04-10 16:00'),
+        category: 'Documentation',
+        status: 'In Progress',
+        priority: 'Low',
+        description: 'Write a documentation for the project',
+    },
+    {
         id: '9f3b8a4e-8a32-45a1-b8ae-6201cfc9c2ae',
         date: new Date('2025-04-12'),
         category: 'Deployment',
