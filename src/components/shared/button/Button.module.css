@@ -14,11 +14,66 @@
 }
 
 .primary {
-
+    background-color: navy;
+    color: white;
 }
 
 .secondary {
-    border: 1px solid navy;
-    color: navy;
+    border: 1px solid #000000;
+    color: #000000;
     background: none;
+}
+
+.planning {
+    background: none;
+    color: #cd1533;
+    border: 1px solid #cd1533;
+}
+
+.implementation {
+    background: none;
+    color: #08005c;
+    border: 1px solid #08005c;
+}
+
+.problem-solving {
+    background: none;
+    color: #6e4004;
+    border: 1px solid #6e4004;
+}
+
+.testing {
+    background: none;
+    color: #005200;
+    border: 1px solid  #005200;
+}
+
+.deployment {
+    background: none;
+    color: #575700;
+    border: 1px solid #575700;
+}
+
+.documentation {
+    background: none;
+    color: #434343;
+    border: 1px solid #434343;
+}
+
+.learning {
+    background: none;
+    color: #3a006a;
+    border: 1px solid #3a006a;
+}
+
+.meeting {
+    background: none;
+    color: #005454;
+    border: 1px solid #005454;
+}
+
+.other {
+    background: none;
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
 }

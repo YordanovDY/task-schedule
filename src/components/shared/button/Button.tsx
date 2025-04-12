@@ -1,13 +1,22 @@
+import { Category } from '../../../types/Task';
+import { getStyleByCategory } from '../../../utils/styleUtil';
 import style from './Button.module.css';
 
 interface ButtonProps {
     event: 'click' | 'submit'
     text: string
-    style: 'primary' | 'secondary'
+    style: 'primary' | 'secondary' | Category
     handler: () => void;
 }
 export default function Button(props: ButtonProps) {
-    const styles = [style['button'], style[props.style]];
+    let btnStyle = style[props.style];
+
+    if (props.style !== 'primary' && props.style !== 'secondary') {
+        const styleName = getStyleByCategory(props.style);
+        btnStyle = style[styleName];
+    }
+
+    const styles = [style['button'], btnStyle];
 
     if (props.event === 'submit') {
         return <button formAction={props.handler} className={styles.join(' ')}>{props.text}</button>

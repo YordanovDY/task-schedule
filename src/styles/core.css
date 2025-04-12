@@ -160,6 +160,10 @@ a,
     align-items: baseline;
 }
 
+.gap-5 {
+    gap: 5px;
+}
+
 .gap-10 {
     gap: 10px;
 }

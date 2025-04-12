@@ -1,4 +1,4 @@
-.chart-board{
+.chart-board {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -10,7 +10,7 @@
     background-color: #37180a;
 }
 
-.header{
+.header {
     color: #fff6a4;
     text-align: center;
     text-decoration: underline;
@@ -23,4 +23,51 @@
     padding: 20px;
     background-color: aliceblue;
     border-radius: 10px;
+}
+
+
+.planning {
+    background-color: #ffced6;
+    color: #cd1533;
+}
+
+.implementation {
+    background-color: #93c7ff;
+    color: #08005c;
+}
+
+.problem-solving {
+    background-color: #ffc982;
+    color: #6e4004;
+}
+
+.testing {
+    background-color: #81ff87;
+    color: #005200
+}
+
+.deployment {
+    background-color: #ffff6b;
+    color: #575700;
+}
+
+.documentation {
+    background-color: #d9d9d9;
+    color: #434343;
+}
+
+.learning {
+    background-color: #cc8dff;
+    color: #3a006a;
+}
+
+.meeting {
+    background-color: #77ffff;
+    color: #005454;
+}
+
+.other {
+    background: none;
+    color: whitesmoke;
+    border: 1px solid gray;
 }

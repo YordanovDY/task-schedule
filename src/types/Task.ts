@@ -1,4 +1,4 @@
-type Category = 'Planning' | 'Implementation' | 'Problem Solving' | 'Testing' | 'Deployment' | 'Documentation'
+export type Category = 'Planning' | 'Implementation' | 'Problem Solving' | 'Testing' | 'Deployment' | 'Documentation'
     | 'Learning' | 'Meeting' | 'Other';
 
 type Status = 'Pending' | 'In Progress' | 'Completed'

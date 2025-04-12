@@ -6,21 +6,21 @@ import TaskRow from './task-row/TaskRow';
 const tasks: Task[] = [
     {
       date: new Date('2025-04-10'),
-      category: 'Planning',
+      category: 'Testing',
       status: 'Pending',
       priority: 'Medium',
       description: 'Outline roadmap for Q2 product updates and features.',
     },
     {
       date: new Date('2025-04-11'),
-      category: 'Implementation',
+      category: 'Deployment',
       status: 'In Progress',
       priority: 'High',
       description: 'Develop authentication flow with OAuth integration.',
     },
     {
       date: new Date('2025-04-09'),
-      category: 'Problem Solving',
+      category: 'Planning',
       status: 'Pending',
       priority: 'Critical',
       description: 'Investigate and resolve API timeout errors affecting checkout.',
