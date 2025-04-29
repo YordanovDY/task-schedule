@@ -5,6 +5,7 @@ import { SelectedDateState } from "../components/providers/schedule-provider/Sch
 
 interface ScheduleContextProps {
     tasks: Task[],
+    pendingTasks: boolean,
     month: Month,
     selectedDate: SelectedDateState,
     year: number,
