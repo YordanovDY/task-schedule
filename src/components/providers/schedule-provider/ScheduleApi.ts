@@ -6,7 +6,7 @@ export function useSchedule(period: string): ScheduleHook {
     const BASE_URL = 'http://localhost:3000';
 
     const [tasks, setTasks] = useState<Task[]>([]);
-    const [pendingTasks, setPendingTasks] = useState<boolean>(false);
+    const [pendingTasks, setPendingTasks] = useState<boolean>(true);
 
     useEffect(() => {
         const abortController = new AbortController();

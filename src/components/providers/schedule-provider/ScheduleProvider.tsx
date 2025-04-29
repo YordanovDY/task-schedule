@@ -5,6 +5,7 @@ import { DateAction, DateState, ScheduleProviderProps, SelectedDateAction, Selec
 import { Task } from "../../../types/Task";
 import { isSameDate } from "../../../utils/dateUtil";
 import { useSchedule } from "./ScheduleApi";
+import SpinnerScreenOverLay from "../../shared/spinner-screen-overlay/SpinnerScreenOverLay";
 
 export default function ScheduleProvider({ children }: ScheduleProviderProps) {
     const { tasks, pendingTasks } = useSchedule('2025-04');
@@ -77,18 +78,21 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
     }
 
     return (
-        <ScheduleContext.Provider
-            value={{
-                tasks,
-                pendingTasks,
-                month,
-                year,
-                selectedDate,
-                previousMonth,
-                nextMonth,
-                showDateTasks
-            }}>
-            {children}
-        </ScheduleContext.Provider>
+        <>
+            <SpinnerScreenOverLay isActive={pendingTasks} />
+            <ScheduleContext.Provider
+                value={{
+                    tasks,
+                    pendingTasks,
+                    month,
+                    year,
+                    selectedDate,
+                    previousMonth,
+                    nextMonth,
+                    showDateTasks
+                }}>
+                {children}
+            </ScheduleContext.Provider>
+        </>
     );
 }
