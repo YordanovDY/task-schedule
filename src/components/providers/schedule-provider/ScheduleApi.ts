@@ -23,10 +23,11 @@ export function useSchedule(period: string): ScheduleHook {
                 setPendingTasks(false);
             })
             .catch(err => {
-                if (err.name !== 'AbortError') {
-                    console.error(err)
+                if (err.name === 'AbortError') {
+                    return;
                 }
-
+                
+                console.error(err)
                 setPendingTasks(false);
             })
 
