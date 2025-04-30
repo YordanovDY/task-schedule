@@ -14,6 +14,31 @@ export default function TaskRow({ task }: TaskRowProps) {
     const priorityStars = getPriorityStars(task.priority);
     const statusIcon = getStatusIcon(task.status);
 
+    let changeStatusBtn = <Button
+        text="Start Task"
+        event="click"
+        style={task.category}
+        handler={() => console.log(`${task.description + 'is completed'}`)}
+    />
+
+    if (task.status === 'In Progress') {
+        changeStatusBtn = <Button
+            text="Complete Task"
+            event="click"
+            style={task.category}
+            handler={() => console.log(`${task.description + 'is completed'}`)}
+        />
+    }
+
+    if (task.status === 'Completed') {
+        changeStatusBtn = <Button
+            text="Return to Task"
+            event="click"
+            style={task.category}
+            handler={() => console.log(`${task.description + 'is completed'}`)}
+        />
+    }
+
     return (
         <li className={compStyle.join(' ')}>
             <div className="d-flex jc-space-between">
@@ -60,12 +85,7 @@ export default function TaskRow({ task }: TaskRowProps) {
                     handler={() => console.log(`${task.description + 'deleted'}`)}
                 />
 
-                <Button
-                    text="Mark as Completed"
-                    event="click"
-                    style={task.category}
-                    handler={() => console.log(`${task.description + 'is completed'}`)}
-                />
+                {changeStatusBtn}
             </div>
         </li>
     );
