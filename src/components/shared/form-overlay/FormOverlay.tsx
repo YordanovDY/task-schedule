@@ -1,3 +1,4 @@
+import TaskTemplate from "../../../constants/TaskTemplate";
 import Form from "../form/Form";
 
 export default function FormOverlay({ onClose }: { onClose: () => void }) {
@@ -7,7 +8,7 @@ export default function FormOverlay({ onClose }: { onClose: () => void }) {
                 onClose();
             }
         }}>
-            <Form />
+            <Form template={TaskTemplate} handler={() => {console.log('click.')}} btnText="Create" />
         </div>
     );
 }
