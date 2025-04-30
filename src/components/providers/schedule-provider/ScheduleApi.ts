@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ScheduleHook } from "./ScheduleProviderTypes";
 import { Task } from "../../../types/Task";
 
@@ -26,7 +26,7 @@ export function useSchedule(period: string): ScheduleHook {
                 if (err.name === 'AbortError') {
                     return;
                 }
-                
+
                 console.error(err)
                 setPendingTasks(false);
             })
@@ -34,5 +34,26 @@ export function useSchedule(period: string): ScheduleHook {
         return () => abortController.abort();
     }, [period]);
 
-    return { tasks, pendingTasks }
+    const changeMonth = useCallback((period: string): void => {
+        setPendingTasks(true);
+        fetch(BASE_URL + `/tasks/month/${period}`)
+            .then(res => res.json())
+            .then(result => {
+                const rawTaskList = result as Task[];
+                const taskList = rawTaskList.map(task => ({ ...task, date: new Date(task.date) }));
+
+                setTasks(taskList);
+                setPendingTasks(false);
+            })
+            .catch(err => {
+                if (err.name === 'AbortError') {
+                    return;
+                }
+
+                console.error(err)
+                setPendingTasks(false);
+            })
+    }, []);
+
+    return { tasks, pendingTasks, changeMonth }
 }

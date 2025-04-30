@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { ScheduleContext } from "../../../contexts/ScheduleContext";
 import { Month } from "../../../types/Month";
 import { DateAction, DateState, ScheduleProviderProps, SelectedDateAction, SelectedDateState } from "./ScheduleProviderTypes";
@@ -8,8 +8,12 @@ import { useSchedule } from "./ScheduleApi";
 import SpinnerScreenOverLay from "../../shared/spinner-screen-overlay/SpinnerScreenOverLay";
 
 export default function ScheduleProvider({ children }: ScheduleProviderProps) {
-    const { tasks, pendingTasks } = useSchedule('2025-04');
     const now = new Date();
+    const currentDate = now.getDate();
+    const currentMonth = now.getMonth() + 1 as Month;
+    const currentYear = now.getFullYear();
+
+    const { tasks, pendingTasks, changeMonth } = useSchedule(`${currentYear}-${currentMonth}`);
 
     const dateReducer = (state: DateState, action: DateAction): DateState => {
         switch (action.type) {
@@ -33,7 +37,7 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
         }
     }
 
-    const [date, dispatchDate] = useReducer(dateReducer, { month: now.getMonth() + 1 as Month, year: now.getFullYear() });
+    const [date, dispatchDate] = useReducer(dateReducer, { month: currentMonth, year: currentYear });
 
     const previousMonth = (): void => {
         dispatchDate({ type: 'PREVIOUS_MONTH' });
@@ -67,15 +71,19 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
     }
 
     const [selectedDate, dispatchSelectedDate] = useReducer(selectedDateReducer, {
-        month: now.getMonth() + 1 as Month,
-        year: now.getFullYear(),
-        date: now.getDate(),
-        tasks: getTasks(now.getDate(), now.getMonth() + 1 as Month, now.getFullYear())
+        month: currentMonth,
+        year: currentYear,
+        date: currentDate,
+        tasks: getTasks(currentDate, currentMonth, currentYear)
     });
 
     const showDateTasks = (date: number, month: Month, year: number) => {
         dispatchSelectedDate({ type: 'SELECT_DATE', date, month, year });
     }
+
+    useEffect(() => {
+        changeMonth(`${date.year}-${date.month}`)
+    }, [date, changeMonth])
 
     return (
         <>

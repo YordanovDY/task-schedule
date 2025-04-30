@@ -24,6 +24,7 @@ export interface SelectedDateState {
 export type ScheduleHook = {
     tasks: Task[],
     pendingTasks: boolean,
+    changeMonth: (period: string) => void,
 }
 
 export type SelectedDateAction = { type: 'SELECT_DATE', date: number, month: Month, year: number };
