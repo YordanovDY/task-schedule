@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { JSX, useState } from "react";
 import FormOverlay from "./FormOverlay";
 
-export default function useFormOverlay() {
+export default function useFormOverlay(title: string, template: JSX.Element[]) {
     const [formOverlay, setFormOverlay] = useState<React.ReactElement | null>(null);
 
     const closeDialog = () => {
@@ -9,7 +9,7 @@ export default function useFormOverlay() {
     }
 
     const openDialog = () => {
-        setFormOverlay(<FormOverlay onClose={closeDialog} />);
+        setFormOverlay(<FormOverlay onClose={closeDialog} title={title} template={template} />);
     }
 
     return { formOverlay, closeDialog, openDialog };

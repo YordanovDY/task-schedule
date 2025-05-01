@@ -4,4 +4,5 @@ export interface FormProps {
     template: JSX.Element[],
     btnText?: string,
     handler: () => void,
+    title?: string,
 }

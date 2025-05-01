@@ -1,3 +1,4 @@
+import TaskTemplate from '../../constants/TaskTemplate';
 import { useScheduleContext } from '../../contexts/ScheduleContext';
 import Button from '../shared/button/Button';
 import useFormOverlay from '../shared/form-overlay/useFormOverlay';
@@ -6,7 +7,7 @@ import TaskRow from './task-row/TaskRow';
 
 export default function ChartBoard() {
   const { selectedDate } = useScheduleContext();
-  const { formOverlay, openDialog } = useFormOverlay();
+  const { formOverlay, openDialog } = useFormOverlay(`${selectedDate.date}.${selectedDate.month}.${selectedDate.year}`, TaskTemplate);
 
   return (
     <section className={style['chart-board']}>
