@@ -7,7 +7,7 @@ import style from './ChartBoard.module.css';
 import TaskRow from './task-row/TaskRow';
 
 export default function ChartBoard() {
-  const { selectedDate, createTask, tasks } = useScheduleContext();
+  const { selectedDate, createTask, appendTask, showDateTasks } = useScheduleContext();
 
   const createTaskHandler = async (formData: FormData) => {
     const time = formData.get('time');
@@ -21,9 +21,22 @@ export default function ChartBoard() {
 
     console.log(data);
 
+    try {
+      const result = await createTask(data);
 
-    const result = await createTask(data);
-  const { formOverlay, openDialog } = useFormOverlay(`${selectedDate.date}.${selectedDate.month}.${selectedDate.year}`, TaskTemplate, createTaskHandler);
+      if (result) {
+        closeDialog()
+        appendTask({ ...result, date: new Date(result.date) });
+        showDateTasks(selectedDate.date, selectedDate.month, selectedDate.year);
+      }
+
+    } catch (err) {
+      console.error(err);
+    }
+
+  }
+  
+  const { formOverlay, openDialog, closeDialog } = useFormOverlay(`${selectedDate.date}.${selectedDate.month}.${selectedDate.year}`, TaskTemplate, createTaskHandler);
 
   return (
     <section className={style['chart-board']}>

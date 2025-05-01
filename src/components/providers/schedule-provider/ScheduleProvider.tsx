@@ -13,7 +13,7 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
     const currentMonth = now.getMonth() + 1 as Month;
     const currentYear = now.getFullYear();
 
-    const { tasks, pendingTasks, changeMonth, createTask } = useSchedule(`${currentYear}-${currentMonth}`);
+    const { tasks, pendingTasks, changeMonth, createTask, appendTask } = useSchedule(`${currentYear}-${currentMonth}`);
 
     const dateReducer = (state: DateState, action: DateAction): DateState => {
         switch (action.type) {
@@ -99,6 +99,7 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
                     nextMonth,
                     showDateTasks,
                     createTask,
+                    appendTask,
                 }}>
                 {children}
             </ScheduleContext.Provider>

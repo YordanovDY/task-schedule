@@ -12,7 +12,8 @@ interface ScheduleContextProps {
     previousMonth: () => void,
     nextMonth: () => void,
     showDateTasks: (date: number, month: Month, year: number) => void,
-    createTask: (data: RequestTask) => Promise<Task | void>
+    createTask: (data: RequestTask) => Promise<Task | void>,
+    appendTask: (newTask: Task) => void,
 }
 
 export const ScheduleContext = createContext<ScheduleContextProps | null>(null);

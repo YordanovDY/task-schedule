@@ -26,6 +26,7 @@ export type ScheduleHook = {
     pendingTasks: boolean,
     changeMonth: (period: string) => void,
     createTask: (data: RequestTask) => Promise<Task | void>,
+    appendTask: (newTask: Task) => void,
 }
 
 export type SelectedDateAction = { type: 'SELECT_DATE', date: number, month: Month, year: number };
