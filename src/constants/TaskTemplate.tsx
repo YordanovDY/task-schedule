@@ -2,17 +2,17 @@ import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
 const TaskTemplate = [
-    <div key="1" className="flex items-center gap-4">
-        <label htmlFor="title" className="w-32 text-sm font-medium text-gray-700">
-            Title
-        </label>
-        <input
-            type="text"
-            name="title"
-            id="title"
-            className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#907731] border-[#907731]"
-        />
-    </div>,
+    // <div key="1" className="flex items-center gap-4">
+    //     <label htmlFor="title" className="w-32 text-sm font-medium text-gray-700">
+    //         Title
+    //     </label>
+    //     <input
+    //         type="text"
+    //         name="title"
+    //         id="title"
+    //         className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#907731] border-[#907731]"
+    //     />
+    // </div>,
 
     <div key="2" className="flex items-center gap-4">
         <label htmlFor="category" className="w-32 text-sm font-medium text-gray-700">
@@ -57,6 +57,7 @@ const TaskTemplate = [
         </label>
         <Flatpickr
             id="time"
+            name="time"
             options={{
                 enableTime: true,
                 noCalendar: true,

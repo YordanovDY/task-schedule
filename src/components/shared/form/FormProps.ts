@@ -1,8 +1,9 @@
 import { JSX } from "react";
+import { SubmitHandler } from "../../../types/SubmitHandler";
 
 export interface FormProps {
     template: JSX.Element[],
     btnText?: string,
-    handler: () => void,
+    handler: SubmitHandler,
     title?: string,
 }

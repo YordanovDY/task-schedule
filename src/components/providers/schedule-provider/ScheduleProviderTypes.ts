@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Month } from "../../../types/Month";
-import { Task } from "../../../types/Task";
+import { RequestTask, Task } from "../../../types/Task";
 
 export interface ScheduleProviderProps {
     children: ReactNode
@@ -25,6 +25,7 @@ export type ScheduleHook = {
     tasks: Task[],
     pendingTasks: boolean,
     changeMonth: (period: string) => void,
+    createTask: (data: RequestTask) => Promise<Task | void>,
 }
 
 export type SelectedDateAction = { type: 'SELECT_DATE', date: number, month: Month, year: number };

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { ScheduleHook } from "./ScheduleProviderTypes";
-import { Task } from "../../../types/Task";
+import { RequestTask, Task } from "../../../types/Task";
 
 export function useSchedule(period: string): ScheduleHook {
     const BASE_URL = 'http://localhost:3000';
@@ -55,5 +55,26 @@ export function useSchedule(period: string): ScheduleHook {
             })
     }, []);
 
-    return { tasks, pendingTasks, changeMonth }
+    const createTask = async (data: RequestTask): Promise<Task | void> => {
+
+        const options: RequestInit = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+        };
+
+        try {
+            const result = await fetch(BASE_URL + `/tasks`, options);
+            const task = result.json();
+            return task;
+
+        } catch (err) {
+            console.error(err);
+        }
+
+    }
+
+    return { tasks, pendingTasks, changeMonth, createTask }
 }

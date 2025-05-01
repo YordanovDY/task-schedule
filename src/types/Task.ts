@@ -13,3 +13,10 @@ export interface Task {
     priority: Priority;
     description: string;
 }
+
+export interface RequestTask {
+    date: string,
+    category: Category;
+    priority: Priority;
+    description: string;
+}
