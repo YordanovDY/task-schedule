@@ -25,7 +25,7 @@ const TaskTemplate = [
         >
             <option value="Planning">Planning</option>
             <option value="Implementation">Implementation</option>
-            <option value="ProblemSolving">Problem Solving</option>
+            <option value="Problem Solving">Problem Solving</option>
             <option value="Testing">Testing</option>
             <option value="Deployment">Deployment</option>
             <option value="Documentation">Documentation</option>
