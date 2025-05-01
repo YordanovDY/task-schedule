@@ -5,5 +5,6 @@ export interface FormProps {
     template: JSX.Element[],
     btnText?: string,
     handler: SubmitHandler,
+    closeDialog?: () => void,
     title?: string,
 }

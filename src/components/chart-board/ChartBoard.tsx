@@ -25,7 +25,6 @@ export default function ChartBoard() {
       const result = await createTask(data);
 
       if (result) {
-        closeDialog()
         appendTask({ ...result, date: new Date(result.date) });
         showDateTasks(selectedDate.date, selectedDate.month, selectedDate.year);
       }
@@ -35,8 +34,8 @@ export default function ChartBoard() {
     }
 
   }
-  
-  const { formOverlay, openDialog, closeDialog } = useFormOverlay(`${selectedDate.date}.${selectedDate.month}.${selectedDate.year}`, TaskTemplate, createTaskHandler);
+
+  const { formOverlay, openDialog } = useFormOverlay(`${selectedDate.date}.${selectedDate.month}.${selectedDate.year}`, TaskTemplate, createTaskHandler);
 
   return (
     <section className={style['chart-board']}>

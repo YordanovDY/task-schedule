@@ -20,7 +20,7 @@ export default function FormOverlay({
             }
         }}>
 
-            <Form template={template} handler={handler} btnText="Create" title={title} />
+            <Form template={template} handler={handler} btnText="Create" title={title} closeDialog={onClose} />
         </div>
     );
 }
