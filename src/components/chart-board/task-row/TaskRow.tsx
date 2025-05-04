@@ -9,7 +9,7 @@ interface TaskRowProps {
 }
 
 export default function TaskRow({ task }: TaskRowProps) {
-    const compStyle = getClasses(task.category);
+    const compStyle = getClasses(task.category, task.pending);
     const catIcon = getCategoryIcon(task.category);
     const priorityStars = getPriorityStars(task.priority);
     const statusIcon = getStatusIcon(task.status);
@@ -17,7 +17,7 @@ export default function TaskRow({ task }: TaskRowProps) {
     let changeStatusBtn = <Button
         text="Start Task"
         event="click"
-        style={task.category}
+        style={task.pending ? 'optimistic' : task.category}
         handler={() => console.log(`${task.description + 'is completed'}`)}
     />
 
@@ -25,7 +25,7 @@ export default function TaskRow({ task }: TaskRowProps) {
         changeStatusBtn = <Button
             text="Complete Task"
             event="click"
-            style={task.category}
+            style={task.pending ? 'optimistic' : task.category}
             handler={() => console.log(`${task.description + 'is completed'}`)}
         />
     }
@@ -34,7 +34,7 @@ export default function TaskRow({ task }: TaskRowProps) {
         changeStatusBtn = <Button
             text="Return to Task"
             event="click"
-            style={task.category}
+            style={task.pending ? 'optimistic' : task.category}
             handler={() => console.log(`${task.description + 'is completed'}`)}
         />
     }
@@ -74,14 +74,14 @@ export default function TaskRow({ task }: TaskRowProps) {
                 <Button
                     text="Edit"
                     event="click"
-                    style={task.category}
+                    style={task.pending ? 'optimistic' : task.category}
                     handler={() => console.log(`${task.description + 'edited'}`)}
                 />
 
                 <Button
                     text="Delete"
                     event="click"
-                    style={task.category}
+                    style={task.pending ? 'optimistic' : task.category}
                     handler={() => console.log(`${task.description + 'deleted'}`)}
                 />
 

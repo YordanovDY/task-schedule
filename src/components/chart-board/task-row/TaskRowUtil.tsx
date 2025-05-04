@@ -3,7 +3,11 @@ import { Category, Priority, Status } from "../../../types/Task";
 import { getStyleByCategory } from "../../../utils/styleUtil";
 import style from "../ChartBoard.module.css";
 
-export function getClasses(category: Category): string[] {
+export function getClasses(category: Category, pending?: boolean): string[] {
+    if (pending) {
+        return [style['task-row'], style['optimistic']];
+    }
+
     const classes = [style['task-row']];
 
     const styleClass = getStyleByCategory(category);

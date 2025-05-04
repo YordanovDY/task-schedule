@@ -77,3 +77,9 @@
     color: #1e1e1e;
     border: 1px solid #1e1e1e;
 }
+
+.optimistic {
+    background: none;
+    color: whitesmoke;
+    border: 1px solid gray;
+}

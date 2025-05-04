@@ -12,6 +12,7 @@ export interface Task {
     status: Status;
     priority: Priority;
     description: string;
+    pending?: boolean;
 }
 
 export interface RequestTask {
