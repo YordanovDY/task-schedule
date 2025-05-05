@@ -27,6 +27,13 @@ export type ScheduleHook = {
     changeMonth: (period: string) => void,
     createTask: (data: RequestTask) => Promise<Task | void>,
     appendTask: (newTask: Task) => void,
+    modifyTask: (task: Task) => void,
 }
 
-export type SelectedDateAction = { type: 'SELECT_DATE', date: number, month: Month, year: number };
+export type SelectedDateAction = {
+    type: 'SELECT_DATE' | 'UPDATE_STATUS',
+    date: number,
+    month: Month,
+    year: number,
+    taskId?: string
+};

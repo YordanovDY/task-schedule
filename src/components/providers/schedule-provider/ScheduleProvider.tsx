@@ -2,7 +2,7 @@ import { useEffect, useReducer } from "react";
 import { ScheduleContext } from "../../../contexts/ScheduleContext";
 import { Month } from "../../../types/Month";
 import { DateAction, DateState, ScheduleProviderProps, SelectedDateAction, SelectedDateState } from "./ScheduleProviderTypes";
-import { Task } from "../../../types/Task";
+import { Status, Task } from "../../../types/Task";
 import { isSameDate } from "../../../utils/dateUtil";
 import { useSchedule } from "./ScheduleApi";
 import SpinnerScreenOverLay from "../../shared/spinner-screen-overlay/SpinnerScreenOverLay";
@@ -13,7 +13,7 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
     const currentMonth = now.getMonth() + 1 as Month;
     const currentYear = now.getFullYear();
 
-    const { tasks, pendingTasks, changeMonth, createTask, appendTask } = useSchedule(`${currentYear}-${currentMonth}`);
+    const { tasks, pendingTasks, changeMonth, createTask, appendTask, modifyTask } = useSchedule(`${currentYear}-${currentMonth}`);
 
     const dateReducer = (state: DateState, action: DateAction): DateState => {
         switch (action.type) {
@@ -52,6 +52,21 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
         return taskList;
     }
 
+    const updateTaskStatus = (taskId: string, tasks: Task[]): Task[] => {
+        const updatedTasks = tasks.map(task => {
+
+            if (task._id === taskId) {
+                const updatedTask = { ...task, status: nextStatus(task.status) };
+                modifyTask(updatedTask);
+                return updatedTask;
+            }
+
+            return task
+        });
+
+        return updatedTasks;
+    }
+
     const { month, year } = date;
 
 
@@ -65,6 +80,14 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
                     tasks: getTasks(action.date, action.month, action.year)
                 }
 
+            case 'UPDATE_STATUS':
+                return {
+                    date: action.date,
+                    month: action.month,
+                    year: action.year,
+                    tasks: updateTaskStatus(action.taskId as string, getTasks(action.date, action.month, action.year)),
+                }
+
             default:
                 return state;
         }
@@ -74,11 +97,15 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
         month: currentMonth,
         year: currentYear,
         date: currentDate,
-        tasks: getTasks(currentDate, currentMonth, currentYear)
+        tasks: getTasks(currentDate, currentMonth, currentYear),
     });
 
     const showDateTasks = (date: number, month: Month, year: number) => {
         dispatchSelectedDate({ type: 'SELECT_DATE', date, month, year });
+    }
+
+    const updateStatus = (taskId: string) => {
+        dispatchSelectedDate({ type: 'UPDATE_STATUS', taskId, date: selectedDate.date, month: selectedDate.month, year: selectedDate.year });
     }
 
     useEffect(() => {
@@ -100,9 +127,19 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
                     showDateTasks,
                     createTask,
                     appendTask,
+                    updateStatus,
                 }}>
                 {children}
             </ScheduleContext.Provider>
         </>
     );
+}
+
+function nextStatus(status: Status): Status {
+    switch (status) {
+        case 'Pending': return 'In Progress';
+        case 'In Progress': return 'Completed';
+        case 'Completed': return 'In Progress';
+        default: return status;
+    }
 }

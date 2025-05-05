@@ -3,12 +3,14 @@ import { Task } from "../../../types/Task";
 import Button from "../../shared/button/Button";
 import { getCategoryIcon, getClasses, getPriorityStars, getStatusIcon } from "./TaskRowUtil";
 import style from '../ChartBoard.module.css';
+import { useScheduleContext } from "../../../contexts/ScheduleContext";
 
 interface TaskRowProps {
     task: Task;
 }
 
 export default function TaskRow({ task }: TaskRowProps) {
+    const { updateStatus } = useScheduleContext();
     const compStyle = getClasses(task.category, task.pending);
     const catIcon = getCategoryIcon(task.category);
     const priorityStars = getPriorityStars(task.priority);
@@ -18,7 +20,7 @@ export default function TaskRow({ task }: TaskRowProps) {
         text="Start Task"
         event="click"
         style={task.pending ? 'optimistic' : task.category}
-        handler={() => console.log(`${task.description + 'is completed'}`)}
+        handler={updateStatus.bind(null, task._id)}
     />
 
     if (task.status === 'In Progress') {
@@ -26,7 +28,7 @@ export default function TaskRow({ task }: TaskRowProps) {
             text="Complete Task"
             event="click"
             style={task.pending ? 'optimistic' : task.category}
-            handler={() => console.log(`${task.description + 'is completed'}`)}
+            handler={updateStatus.bind(null, task._id)}
         />
     }
 
@@ -35,7 +37,7 @@ export default function TaskRow({ task }: TaskRowProps) {
             text="Return to Task"
             event="click"
             style={task.pending ? 'optimistic' : task.category}
-            handler={() => console.log(`${task.description + 'is completed'}`)}
+            handler={updateStatus.bind(null, task._id)}
         />
     }
 

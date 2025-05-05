@@ -80,5 +80,9 @@ export function useSchedule(period: string): ScheduleHook {
         setTasks(state => [...state, newTask]);
     }
 
-    return { tasks, pendingTasks, changeMonth, createTask, appendTask }
+    const modifyTask = (task: Task): void => {
+        setTasks(state => state.map(stateTask => stateTask._id === task._id ? task : stateTask));
+    }
+
+    return { tasks, pendingTasks, changeMonth, createTask, appendTask, modifyTask }
 }
