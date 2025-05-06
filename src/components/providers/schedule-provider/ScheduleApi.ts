@@ -105,5 +105,9 @@ export function useSchedule(period: string): ScheduleHook {
         setPendingTasks(isPending);
     }
 
-    return { tasks, pendingTasks, changeMonth, createTask, appendTask, modifyTask, modifyTaskStatusRequest, setPending }
+    const removeTask = (tasksId: string) => {
+        setTasks(state => state.filter(task => task._id !== tasksId));
+    }
+
+    return { tasks, pendingTasks, changeMonth, createTask, appendTask, removeTask, modifyTask, modifyTaskStatusRequest, setPending }
 }

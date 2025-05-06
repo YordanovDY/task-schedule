@@ -10,7 +10,7 @@ interface TaskRowProps {
 }
 
 export default function TaskRow({ task }: TaskRowProps) {
-    const { updateStatus } = useScheduleContext();
+    const { updateStatus, deleteTask } = useScheduleContext();
     const compStyle = getClasses(task.category, task.pending);
     const catIcon = getCategoryIcon(task.category);
     const priorityStars = getPriorityStars(task.priority);
@@ -73,18 +73,12 @@ export default function TaskRow({ task }: TaskRowProps) {
             </div>
 
             <div className="d-flex gap-20 ai-center">
-                <Button
-                    text="Edit"
-                    event="click"
-                    style={task.pending ? 'optimistic' : task.category}
-                    handler={() => console.log(`${task.description + 'edited'}`)}
-                />
 
                 <Button
                     text="Delete"
                     event="click"
                     style={task.pending ? 'optimistic' : task.category}
-                    handler={() => console.log(`${task.description + 'deleted'}`)}
+                    handler={deleteTask.bind(null, task._id)}
                 />
 
                 {changeStatusBtn}

@@ -13,7 +13,7 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
     const currentMonth = now.getMonth() + 1 as Month;
     const currentYear = now.getFullYear();
 
-    const { tasks, pendingTasks, changeMonth, createTask, appendTask, modifyTask, modifyTaskStatusRequest, setPending } = useSchedule(`${currentYear}-${currentMonth}`);
+    const { tasks, pendingTasks, changeMonth, createTask, appendTask, modifyTask, removeTask, modifyTaskStatusRequest, setPending } = useSchedule(`${currentYear}-${currentMonth}`);
 
     const dateReducer = (state: DateState, action: DateAction): DateState => {
         switch (action.type) {
@@ -67,6 +67,10 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
         return updatedTasks;
     }
 
+    const removeTaskFromDailyTasks = (taskId: string, tasks: Task[]): Task[] => {
+        return tasks.filter(task => task._id !== taskId);
+    }
+
     const { month, year } = date;
 
 
@@ -86,6 +90,14 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
                     month: action.month,
                     year: action.year,
                     tasks: updateTaskStatus(action.taskId as string, getTasks(action.date, action.month, action.year)),
+                }
+
+            case 'REMOVE_TASK':
+                return {
+                    date: action.date,
+                    month: action.month,
+                    year: action.year,
+                    tasks: removeTaskFromDailyTasks(action.taskId as string, getTasks(action.date, action.month, action.year)),
                 }
 
             default:
@@ -119,6 +131,11 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
         setPending(false);
     }
 
+    const deleteTask = (taskId: string) => {
+        removeTask(taskId);
+        dispatchSelectedDate({ type: 'REMOVE_TASK', taskId, date: selectedDate.date, month: selectedDate.month, year: selectedDate.year });
+    }
+
     useEffect(() => {
         changeMonth(`${date.year}-${date.month}`)
     }, [date, changeMonth])
@@ -139,6 +156,7 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
                     createTask,
                     appendTask,
                     updateStatus,
+                    deleteTask,
                 }}>
                 {children}
             </ScheduleContext.Provider>

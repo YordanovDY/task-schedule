@@ -27,13 +27,14 @@ export type ScheduleHook = {
     changeMonth: (period: string) => void,
     createTask: (data: RequestTask) => Promise<Task | void>,
     appendTask: (newTask: Task) => void,
+    removeTask: (taskId: string) => void,
     modifyTask: (task: Task) => void,
     modifyTaskStatusRequest: (taskId: string, status: Status) => Promise<Task | void>
     setPending: (isPending: boolean) => void
 }
 
 export type SelectedDateAction = {
-    type: 'SELECT_DATE' | 'UPDATE_STATUS',
+    type: 'SELECT_DATE' | 'UPDATE_STATUS' | 'REMOVE_TASK',
     date: number,
     month: Month,
     year: number,
