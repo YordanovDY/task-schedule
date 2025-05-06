@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Month } from "../../../types/Month";
-import { RequestTask, Task } from "../../../types/Task";
+import { RequestTask, Status, Task } from "../../../types/Task";
 
 export interface ScheduleProviderProps {
     children: ReactNode
@@ -28,6 +28,8 @@ export type ScheduleHook = {
     createTask: (data: RequestTask) => Promise<Task | void>,
     appendTask: (newTask: Task) => void,
     modifyTask: (task: Task) => void,
+    modifyTaskStatusRequest: (taskId: string, status: Status) => Promise<Task | void>
+    setPending: (isPending: boolean) => void
 }
 
 export type SelectedDateAction = {

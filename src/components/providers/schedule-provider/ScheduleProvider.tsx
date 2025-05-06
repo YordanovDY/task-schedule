@@ -13,7 +13,7 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
     const currentMonth = now.getMonth() + 1 as Month;
     const currentYear = now.getFullYear();
 
-    const { tasks, pendingTasks, changeMonth, createTask, appendTask, modifyTask } = useSchedule(`${currentYear}-${currentMonth}`);
+    const { tasks, pendingTasks, changeMonth, createTask, appendTask, modifyTask, modifyTaskStatusRequest, setPending } = useSchedule(`${currentYear}-${currentMonth}`);
 
     const dateReducer = (state: DateState, action: DateAction): DateState => {
         switch (action.type) {
@@ -104,8 +104,19 @@ export default function ScheduleProvider({ children }: ScheduleProviderProps) {
         dispatchSelectedDate({ type: 'SELECT_DATE', date, month, year });
     }
 
-    const updateStatus = (taskId: string) => {
+    const updateStatus = async (taskId: string) => {
+        const foundTask = tasks.find(task => task._id === taskId);
+
+        if (!foundTask) {
+            return;
+        }
+
+        const newStatus = nextStatus(foundTask.status);
+        setPending(true);
+
+        await modifyTaskStatusRequest(taskId, newStatus);
         dispatchSelectedDate({ type: 'UPDATE_STATUS', taskId, date: selectedDate.date, month: selectedDate.month, year: selectedDate.year });
+        setPending(false);
     }
 
     useEffect(() => {

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { ScheduleHook } from "./ScheduleProviderTypes";
-import { RequestTask, Task } from "../../../types/Task";
+import { RequestTask, Status, Task } from "../../../types/Task";
 
 export function useSchedule(period: string): ScheduleHook {
     const BASE_URL = 'http://localhost:3000';
@@ -84,5 +84,26 @@ export function useSchedule(period: string): ScheduleHook {
         setTasks(state => state.map(stateTask => stateTask._id === task._id ? task : stateTask));
     }
 
-    return { tasks, pendingTasks, changeMonth, createTask, appendTask, modifyTask }
+    const modifyTaskStatusRequest = async (taskId: string, status: Status): Promise<Task | void> => {
+        try {
+            const response = await fetch(BASE_URL + `/tasks/status/${taskId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'Application/json'
+                },
+                body: JSON.stringify({ status })
+            });
+
+            return response.json();
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    const setPending = (isPending: boolean) => {
+        setPendingTasks(isPending);
+    }
+
+    return { tasks, pendingTasks, changeMonth, createTask, appendTask, modifyTask, modifyTaskStatusRequest, setPending }
 }
