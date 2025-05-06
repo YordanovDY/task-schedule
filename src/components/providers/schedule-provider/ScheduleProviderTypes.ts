@@ -30,6 +30,7 @@ export type ScheduleHook = {
     removeTask: (taskId: string) => void,
     modifyTask: (task: Task) => void,
     modifyTaskStatusRequest: (taskId: string, status: Status) => Promise<Task | void>
+    removeTaskRequest: (taskId: string) => Promise<Task | void>
     setPending: (isPending: boolean) => void
 }
 

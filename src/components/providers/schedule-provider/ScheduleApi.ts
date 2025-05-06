@@ -101,6 +101,19 @@ export function useSchedule(period: string): ScheduleHook {
         }
     }
 
+    const removeTaskRequest = async (taskId: string): Promise<Task | void> => {
+        try {
+            const response = await fetch(BASE_URL + `/tasks/${taskId}`, {
+                method: 'DELETE',
+            });
+
+            return response.json();
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     const setPending = (isPending: boolean) => {
         setPendingTasks(isPending);
     }
@@ -109,5 +122,5 @@ export function useSchedule(period: string): ScheduleHook {
         setTasks(state => state.filter(task => task._id !== tasksId));
     }
 
-    return { tasks, pendingTasks, changeMonth, createTask, appendTask, removeTask, modifyTask, modifyTaskStatusRequest, setPending }
+    return { tasks, pendingTasks, changeMonth, createTask, appendTask, removeTask, removeTaskRequest, modifyTask, modifyTaskStatusRequest, setPending }
 }
