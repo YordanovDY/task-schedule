@@ -3,7 +3,7 @@ import { ScheduleHook } from "./ScheduleProviderTypes";
 import { RequestTask, Status, Task } from "../../../types/Task";
 
 export function useSchedule(period: string): ScheduleHook {
-    const BASE_URL = 'http://localhost:3000';
+    const BASE_URL = 'http://localhost:3003';
 
     const [tasks, setTasks] = useState<Task[]>([]);
     const [pendingTasks, setPendingTasks] = useState<boolean>(true);
